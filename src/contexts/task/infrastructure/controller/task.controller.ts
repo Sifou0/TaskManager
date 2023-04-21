@@ -64,7 +64,18 @@ export class TaskController {
       res.status(httpResponse.status).json(httpResponse.body)
     }
   }
+
+  async deleteTask(req: Request, res: Response) {
+    const task = await this.deleteTaskUseCase.execute(req.params.id)
+    res.status(200).json(task)
+  }
+
+  async updateTask(req: Request, res: Response) {
+    const task = await this.updateTaskUseCase.execute(req.params.id, req.body)
+    res.status(200).json(task)
+  }
 }
+
 
 function convertErrorsToHttpResponse(error: unknown) {
   // https://www.baeldung.com/rest-api-error-handling-best-practices

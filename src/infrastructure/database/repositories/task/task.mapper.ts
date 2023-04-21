@@ -1,5 +1,5 @@
 import { TaskRaw } from "../../../../contexts/task";
-import { Task } from "../../../../contexts/task/domains";
+import { Task } from "@prisma/client";
 
 // TODO: use real types
 export function toTaskRaw(task: Task): TaskRaw {

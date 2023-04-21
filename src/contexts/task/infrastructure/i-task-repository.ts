@@ -6,8 +6,8 @@ export type TaskCreateRaw = TaskCreate
 
 export interface ITaskRepository {
   getAllTasks(): Promise<TaskRaw[]>
-  addTask(book: TaskCreateRaw): Promise<TaskRaw>
+  addTask(task: TaskCreateRaw): Promise<TaskRaw>
   getTask(id: string): Promise<TaskRaw | null>
   deleteTask(id: string): Promise<void>
-  updateTask(task: TaskRaw): Promise<TaskRaw>
+  updateTask(task: TaskCreateRaw): Promise<TaskRaw>
 }

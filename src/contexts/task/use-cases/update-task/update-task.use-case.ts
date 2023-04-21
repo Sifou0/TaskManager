@@ -4,7 +4,7 @@ import { ITaskRepository } from "../../infrastructure";
 export class updateTaskUseCase {
     constructor(private taskRepository: ITaskRepository) { }
 
-    async execute(task: Task): Promise<Task> {
+    async execute(id: string, task: Omit<TaskCreate, 'id'>): Promise<Task> {
         return this.taskRepository.updateTask(task)
     }
 }
