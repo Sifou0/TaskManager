@@ -56,7 +56,7 @@ export class TaskController {
 
   async getTask(req: Request, res: Response) {
     try {
-      const task = await this.getTaskUseCase.execute(req.body)
+      const task = await this.getTaskUseCase.execute(req.params.id)
       res.status(200).json(task)
     } catch (error) {
       // à faire idéalement dans chaque fonction (voir à faire une mise en commmun)
@@ -72,7 +72,7 @@ export class TaskController {
 
   async updateTask(req: Request, res: Response) {
     const task = await this.updateTaskUseCase.execute(req.params.id, req.body)
-    res.status(200).json(task)
+    return res.status(200).json(task)
   }
 }
 
