@@ -1,0 +1,3 @@
+# ICI MES CHOIX TECHNIQUES
+
+vous pouvez aussi expliquer les problèmes rencontrées etc...
