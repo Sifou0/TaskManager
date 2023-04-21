@@ -50,10 +50,16 @@ export class TaskController {
   }
 
   async getTasks(req: Request, res: Response) {
-    const tasks = await this.getTasksUseCase.execute()
+    let tasks = await this.getTasksUseCase.execute()
+    if (req.query['page'] && parseInt(req.query['page'].toString()) > 0) {
+      tasks = tasks.slice((parseInt(req.query['page'].toString()) - 1) * 10, (parseInt(req.query['page'].toString()) - 1) * 10 + 10)
+    }
     if (req.query['sorted'] == 'true') {
       tasks.sort(function (a, b) { return a.priority - b.priority; })
     }
+    console.log('====================================');
+    console.log(tasks.length);
+    console.log('====================================');
     return res.status(200).json(tasks)
   }
 
