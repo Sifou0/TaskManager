@@ -51,7 +51,10 @@ export class TaskController {
 
   async getTasks(req: Request, res: Response) {
     const tasks = await this.getTasksUseCase.execute()
-    res.status(200).json(tasks)
+    if (req.query['sorted'] == 'true') {
+      tasks.sort(function (a, b) { return a.priority - b.priority; })
+    }
+    return res.status(200).json(tasks)
   }
 
   async getTask(req: Request, res: Response) {
@@ -74,6 +77,7 @@ export class TaskController {
     const task = await this.updateTaskUseCase.execute(req.params.id, req.body)
     return res.status(200).json(task)
   }
+
 }
 
 
