@@ -1,11 +1,12 @@
 import { TaskRaw } from "../../../../contexts/task";
-import { Tache } from "@prisma/client"
+import { Task } from "../../../../contexts/task/domains";
 
 // TODO: use real types
-export function toTaskRaw(task: Tache): TaskRaw {
+export function toTaskRaw(task: Task): TaskRaw {
   return {
     id: task.id,
     title: task.title,
-    description: task.description
+    description: task.description,
+    priority: task.priority
   }
 }

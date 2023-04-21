@@ -1,7 +1,7 @@
 -- CreateTable
-CREATE TABLE "Tache" (
+CREATE TABLE "Task" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "title" TEXT NOT NULL,
     "description" TEXT,
-    "priorite" INTEGER NOT NULL
+    "priority" INTEGER NOT NULL
 );

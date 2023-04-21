@@ -13,7 +13,7 @@ export const taskInjector = (externalDependencies: TaskExternalDependencies): Ro
 
   const getTasksUseCase = new GetTasksUseCase(taskRepository)
 
-  const taskController = new TaskController(getTasksUseCase)
+  // const taskController = new TaskController(getTasksUseCase)
 
   return taskRoutes(taskController)
 }

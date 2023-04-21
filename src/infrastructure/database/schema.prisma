@@ -8,9 +8,9 @@ datasource db {
 }
 
 
-model Tache {
+model Task {
   id String @id @default(uuid())
   title String
   description String?
-  priorite Int
+  priority Int
 }
