@@ -14,3 +14,8 @@ model Task {
   description String
   priority Int
 }
+
+model Tag {
+  id String @id @default(uuid())
+  title String
+}

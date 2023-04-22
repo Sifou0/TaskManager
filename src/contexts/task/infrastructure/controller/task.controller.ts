@@ -57,9 +57,6 @@ export class TaskController {
     if (req.query['sorted'] == 'true') {
       tasks.sort(function (a, b) { return a.priority - b.priority; })
     }
-    console.log('====================================');
-    console.log(tasks.length);
-    console.log('====================================');
     return res.status(200).json(tasks)
   }
 
