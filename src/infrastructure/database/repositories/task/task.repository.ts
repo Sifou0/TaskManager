@@ -40,7 +40,4 @@ export class TaskRepository implements ITaskRepository {
     })
     return toTaskRaw(taskUpdated)
   }
-
-  //TODO: to complete
-
 }
