@@ -4,7 +4,7 @@
 
 - src : le code source
 
-- docs : contient la documentation en openapi3
+- DOC : contient la documentation en openapi3
 
 - test : via postman ou automatisé
 
