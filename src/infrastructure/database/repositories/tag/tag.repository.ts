@@ -7,11 +7,11 @@ export class TagRepository implements ITagRepository {
     constructor(private readonly database: RelationalDatabase) { }
 
     async getAllTags(): Promise<Tag[]> {
-        const tags = await this.database.client.tag.findMany({ include: { tasks: true } })
+        const tags = await this.database.client.tag.findMany()
         return tags.map(toTagRaw)
     }
     async addTag(tag: TagCreateRaw): Promise<TagRaw> {
-        const newTag = await this.database.client.tag.create({ data: tag, include: { tasks: true } })
+        const newTag = await this.database.client.tag.create({ data: tag })
         return toTagRaw(newTag)
     }
 

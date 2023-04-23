@@ -1,7 +1,9 @@
 -- CreateTable
 CREATE TABLE "Tag" (
     "id" TEXT NOT NULL PRIMARY KEY,
-    "title" TEXT NOT NULL
+    "title" TEXT NOT NULL,
+    "taskId" TEXT NOT NULL,
+    CONSTRAINT "Tag_taskId_fkey" FOREIGN KEY ("taskId") REFERENCES "Task" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -10,7 +12,5 @@ CREATE TABLE "Task" (
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "priority" INTEGER NOT NULL,
-    "isDone" BOOLEAN NOT NULL,
-    "tagId" TEXT NOT NULL,
-    CONSTRAINT "Task_tagId_fkey" FOREIGN KEY ("tagId") REFERENCES "Tag" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    "isDone" BOOLEAN NOT NULL
 );

@@ -3,10 +3,10 @@ import { TagRaw } from "../../../../contexts/tag/infrastructure";
 import { toTaskRaw } from "../task/task.mapper";
 
 
-export function toTagRaw(tag: Tag & { tasks: Task[] }): TagRaw {
+export function toTagRaw(tag: Tag): TagRaw {
     return {
         id: tag.id,
         title: tag.title,
-        tasks: tag.tasks.map(toTaskRaw)
+        taskId: tag.taskId
     }
 }
