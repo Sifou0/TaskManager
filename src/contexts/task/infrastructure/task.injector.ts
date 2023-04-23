@@ -7,6 +7,7 @@ import { GetTaskUseCase } from '../use-cases/get-task'
 import { addTaskUseCase } from '../use-cases/add-task'
 import { deleteTaskUseCase } from '../use-cases/delete-task'
 import { updateTaskUseCase } from '../use-cases/update-task'
+import { updateTaskStatusUseCase } from '../use-cases/update-test-status'
 
 export type TaskExternalDependencies = {
   database: RelationalDatabase
@@ -20,6 +21,7 @@ export const taskInjector = (externalDependencies: TaskExternalDependencies): Ro
   const _getTaskUseCase = new GetTaskUseCase(taskRepository)
   const _deleteTaskUseCase = new deleteTaskUseCase(taskRepository)
   const _updateTaskUseCase = new updateTaskUseCase(taskRepository)
+  const __updateTaskStatusUseCase = new updateTaskStatusUseCase(taskRepository)
 
   const taskController = new TaskController(
     _getTasksUseCase,
@@ -27,6 +29,7 @@ export const taskInjector = (externalDependencies: TaskExternalDependencies): Ro
     _deleteTaskUseCase,
     _updateTaskUseCase,
     _getTaskUseCase,
+    __updateTaskStatusUseCase
   )
 
   return taskRoutes(taskController)

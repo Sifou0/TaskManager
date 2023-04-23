@@ -4,6 +4,7 @@ import { GetTasksUseCase } from '../../use-cases/get-tasks'
 import { addTaskUseCase } from '../../use-cases/add-task'
 import { deleteTaskUseCase } from '../../use-cases/delete-task'
 import { updateTaskUseCase } from '../../use-cases/update-task'
+import { updateTaskStatusUseCase } from '../../use-cases/update-test-status'
 import { ValidationError, validate } from 'jsonschema'
 import { ValidatorResult } from 'jsonschema'
 import { TaskNotFoundError } from '../i-task-repository'
@@ -27,12 +28,14 @@ const TaskCreateSchema = {
 }
 
 export class TaskController {
+
   constructor(
     private readonly getTasksUseCase: GetTasksUseCase,
     private readonly addTaskUseCase: addTaskUseCase,
     private readonly deleteTaskUseCase: deleteTaskUseCase,
     private readonly updateTaskUseCase: updateTaskUseCase,
-    private readonly getTaskUseCase: GetTaskUseCase
+    private readonly getTaskUseCase: GetTaskUseCase,
+    private readonly updateTaskStatusUseCase: updateTaskStatusUseCase
   ) { }
 
   async addTask(req: Request, res: Response) {
@@ -77,12 +80,17 @@ export class TaskController {
   }
 
   async updateTask(req: Request, res: Response) {
-    const task = await this.updateTaskUseCase.execute(req.params.id, req.body)
-    return res.status(200).json(task)
+
+    if (req.query['status'] == 'done') {
+      const task = await this.updateTaskStatusUseCase.execute(req.params.id)
+      return res.status(200).json(task)
+    }
+    else {
+      const task = await this.updateTaskUseCase.execute(req.params.id, req.body)
+      return res.status(200).json(task)
+    }
   }
-
 }
-
 
 function convertErrorsToHttpResponse(error: unknown) {
   // https://www.baeldung.com/rest-api-error-handling-best-practices

@@ -7,15 +7,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Task {
-  id String @id @default(uuid())
-  title String
+  id          String  @id @default(uuid())
+  title       String
   description String
-  priority Int
+  priority    Int
+  isDone      Boolean
 }
 
 model Tag {
-  id String @id @default(uuid())
+  id    String @id @default(uuid())
   title String
 }

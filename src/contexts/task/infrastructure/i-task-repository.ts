@@ -10,4 +10,5 @@ export interface ITaskRepository {
   getTask(id: string): Promise<TaskRaw | null>
   deleteTask(id: string): Promise<void>
   updateTask(task: TaskCreateRaw): Promise<TaskRaw>
+  updateTaskStatus(id: string): Promise<TaskRaw | null>
 }

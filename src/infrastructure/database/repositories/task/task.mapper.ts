@@ -7,6 +7,7 @@ export function toTaskRaw(task: Task): TaskRaw {
     id: task.id,
     title: task.title,
     description: task.description,
-    priority: task.priority
+    priority: task.priority,
+    isDone: task.isDone
   }
 }

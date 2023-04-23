@@ -3,6 +3,7 @@ export type Task = {
     title: string
     description: string
     priority: number
+    isDone: boolean
 }
 
 export type TaskCreate = Omit<Task, 'id'>

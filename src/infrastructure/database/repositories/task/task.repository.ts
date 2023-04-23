@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client'
 import { ITaskRepository, TaskCreateRaw, TaskRaw } from '../../../../contexts/task'
-import { Task, TaskCreate } from '../../../../contexts/task/domains'
+import { Task } from '../../../../contexts/task/domains'
 import { RelationalDatabase } from '../../database'
 import { toTaskRaw } from './task.mapper'
 
@@ -12,6 +12,7 @@ export class TaskRepository implements ITaskRepository {
     return tasks.map(toTaskRaw)
   }
   async addTask(task: TaskCreateRaw): Promise<TaskRaw> {
+    task.isDone = false
     if (task.description == null) {
       task.description = ""
     }
@@ -20,10 +21,12 @@ export class TaskRepository implements ITaskRepository {
     })
     return toTaskRaw(newTask)
   }
+
   async getTask(id: string): Promise<Task | null> {
     const task = await this.database.client.task.findUnique({ where: { id } })
     return task ? toTaskRaw(task) : null
   }
+
   async deleteTask(id: string): Promise<void> {
     try {
       await this.database.client.task.delete({ where: { id } })
@@ -40,4 +43,19 @@ export class TaskRepository implements ITaskRepository {
     })
     return toTaskRaw(taskUpdated)
   }
+
+  async updateTaskStatus(id: string): Promise<Task | null> {
+
+    let task = await this.database.client.task.findUnique({ where: { id } })
+    if (task != null) {
+      task.isDone = !task.isDone
+      const taskUpdated = await this.database.client.task.update({
+        where: { id: task.id },
+        data: task,
+      })
+      return toTaskRaw(task)
+    }
+    return task
+  }
+
 }

@@ -14,7 +14,7 @@ export function taskRoutes(controller: TaskController): Router {
 
   router.put('/:id', controller.updateTask.bind(controller))
 
-  router.get('/sort', controller.getTasks.bind(controller))
+  // router.get('/sort', controller.getTasks.bind(controller))
 
   return router
 }
