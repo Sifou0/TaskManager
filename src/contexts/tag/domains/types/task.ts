@@ -4,6 +4,4 @@ export type Task = {
     description: string
     priority: number
     isDone: boolean
-    tagId: string
 }
-export type TaskCreate = Omit<Task, 'id'>
